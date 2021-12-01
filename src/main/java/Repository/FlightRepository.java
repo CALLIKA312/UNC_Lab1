@@ -1,4 +1,4 @@
-package main.java.Repository;
+package Repository;
 
 public class FlightRepository {
 
