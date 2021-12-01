@@ -1,4 +1,4 @@
-package Repository;
+package main.java.Repository;
 
 public class RouteRepository {
 }

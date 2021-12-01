@@ -1,4 +1,4 @@
-package Entity;
+package main.java.Entity;
 
 import javax.xml.crypto.Data;
 
