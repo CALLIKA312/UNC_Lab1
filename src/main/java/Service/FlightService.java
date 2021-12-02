@@ -9,6 +9,10 @@ public class FlightService {
 
     private FlightRepository flightRepository;
 
+    public Flight createFlight() {
+        return new Flight();
+    }
+
     public Flight createFlight(Long flightId,
                                String airbus, String route,
                                Data departTime, Data travelTime) {
