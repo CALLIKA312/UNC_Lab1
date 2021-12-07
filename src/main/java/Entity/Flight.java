@@ -1,17 +1,17 @@
 package Entity;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class Flight {
 
     private Long flightId;
     private String airbus, route;
-    private Data departTime, travelTime;
+    private Date departTime, travelTime;
 
     public Flight() {
     }
 
-    public Flight(Long flightId, String airbus, String route, Data departTime, Data travelTime) {
+    public Flight(Long flightId, String airbus, String route, Date departTime, Date travelTime) {
         this.flightId = flightId;
         this.airbus = airbus;
         this.route = route;
@@ -43,19 +43,19 @@ public class Flight {
         this.route = route;
     }
 
-    public Data getDepartTime() {
+    public Date getDepartTime() {
         return departTime;
     }
 
-    public void setDepartTime(Data departTime) {
+    public void setDepartTime(Date departTime) {
         this.departTime = departTime;
     }
 
-    public Data getTravelTime() {
+    public Date getTravelTime() {
         return travelTime;
     }
 
-    public void setTravelTime(Data travelTime) {
+    public void setTravelTime(Date travelTime) {
         this.travelTime = travelTime;
     }
 

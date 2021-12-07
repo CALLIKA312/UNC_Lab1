@@ -1,6 +1,5 @@
-import Controller.MainController;
+import Controller.MainControler;
 import Utils.FlightParser;
-import com.sun.glass.ui.Application;
 
 import java.io.BufferedReader;
 import java.io.IOException;

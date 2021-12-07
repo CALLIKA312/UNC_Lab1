@@ -1,8 +1,9 @@
 package Entity;
 
 public class Route {
-
-    private String departPoint, arrivalPoint;
+    private Long RouteId;
+    private String departPoint;
+    private String arrivalPoint;
 
     public Route() {
     }
@@ -12,8 +13,18 @@ public class Route {
         this.arrivalPoint = arrivalPoint;
     }
 
+    public Route(Long routeId, String departPoint, String arrivalPoint) {
+        this.RouteId = routeId;
+        this.departPoint = departPoint;
+        this.arrivalPoint = arrivalPoint;
+    }
+
+    public Long getRouteId(){return this.RouteId;}
+
+    public void setRouteId(Long RouteId){this.RouteId=RouteId;}
+
     public String getDepartPoint() {
-        return departPoint;
+        return this.departPoint;
     }
 
     public void setDepartPoint(String departPoint) {
@@ -21,18 +32,14 @@ public class Route {
     }
 
     public String getArrivalPoint() {
-        return arrivalPoint;
+        return this.arrivalPoint;
     }
 
     public void setArrivalPoint(String arrivalPoint) {
         this.arrivalPoint = arrivalPoint;
     }
 
-    @Override
     public String toString() {
-        return "Route{" +
-                "departPoint='" + departPoint + '\'' +
-                ", arrivalPoint='" + arrivalPoint + '\'' +
-                '}';
+        return "Route{departPoint='" + this.departPoint + '\'' + ", arrivalPoint='" + this.arrivalPoint + '\'' + '}';
     }
 }
