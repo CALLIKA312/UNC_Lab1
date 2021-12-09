@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Flight {
 
-    private Long flightId;
-    private String airbus, route;
+    private Long flightId,route;
+    private String airbus;
     private Date departTime, travelTime;
 
     public Flight() {
     }
 
-    public Flight(Long flightId, String airbus, String route, Date departTime, Date travelTime) {
+    public Flight(Long flightId, String airbus, Long route, Date departTime, Date travelTime) {
         this.flightId = flightId;
         this.airbus = airbus;
         this.route = route;
@@ -35,11 +35,11 @@ public class Flight {
         this.airbus = airbus;
     }
 
-    public String getRoute() {
+    public Long getRoute() {
         return route;
     }
 
-    public void setRoute(String route) {
+    public void setRoute(Long route) {
         this.route = route;
     }
 

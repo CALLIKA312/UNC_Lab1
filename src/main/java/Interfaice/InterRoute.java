@@ -10,6 +10,6 @@ public interface InterRoute {
     Boolean delete(Route route);
     Boolean FileUnload(List<Route> list);
     List<Route> fileLoad();
-    Route getRouteDepart(String DepatrtPoint, String ArrivalPoint) throws NotFoundException;
-    Route getRouteDepart(String DepatrtPoint) throws NotFoundException;
+    Route getRouteDepart(String departPoint, String arrivalPoint) throws NotFoundException;
+    Route getRouteDepart(Long id) throws NotFoundException;
 }

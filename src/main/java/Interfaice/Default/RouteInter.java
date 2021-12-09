@@ -57,22 +57,22 @@ public class RouteInter implements InterRoute{
         return list;
     }
 
-    @Override
-    public Route getRouteDepart(String DepatrtPoint, String ArrivalPoint) throws NotFoundException {
+   @Override
+    public Route getRouteDepart(String departPoint, String arrivalPoint) throws NotFoundException {
         List<Route> list = fileLoad();
         for(Route route: list){
-            if(route.getDepartPoint().equals(DepatrtPoint) & route.getDepartPoint().equals(ArrivalPoint)) return route;
+            if(route.getDepartPoint().equals(departPoint) & route.getDepartPoint().equals(arrivalPoint)) return route;
         }
-        throw new NotFoundException("Not found route: " + DepatrtPoint + " " + ArrivalPoint);
+        throw new NotFoundException("Not found route: " + departPoint + " " + arrivalPoint);
     }
 
     @Override
-    public Route getRouteDepart(String DepatrtPoint) throws NotFoundException {
+    public Route getRouteDepart(Long id) throws NotFoundException {
         List<Route> list = fileLoad();
         for(Route route: list){
-            if(route.getDepartPoint().equals(DepatrtPoint)) return route;
+            if(route.getRouteId().equals(id)) return route;
         }
-        throw new NotFoundException("Not found route: " + DepatrtPoint);
+        throw new NotFoundException("Not found id: " + id);
     }
 
 

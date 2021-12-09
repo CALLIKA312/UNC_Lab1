@@ -1,16 +1,15 @@
 package Controller;
 
-import Exception.AlreadyExistException;
-import Exception.NotFoundException;
 import Entity.Flight;
 import Entity.Route;
+import Exception.AlreadyExistException;
+import Exception.NotFoundException;
 import Interfaice.InterFlight;
 import Interfaice.InterRoute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,7 +28,7 @@ public class MainControler {
 
 
     @ShellMethod("add new flight")
-    public String addFlight(String airbus, String route, Date departTime, Date travelTime) {
+    public String addFlight(String airbus, Long route, Date departTime, Date travelTime) {
         long id = 1l;
         List<Flight> list = flight.fileLoad();
         Flight flightEnd;
@@ -60,7 +59,7 @@ public class MainControler {
 
             Flight fUpdate = new Flight(flight.findFlight(airbus, route).getFlightId(),
                     reader.readLine(),
-                    reader.readLine(),
+                    Long.parseLong(reader.readLine()),
                     formatter.parse(reader.readLine()),
                     formatter.parse(reader.readLine())
             );
@@ -104,7 +103,7 @@ public class MainControler {
                 routeId = routeEnd.getRouteId() + 1;
         }
         try {
-            if(routee.getRouteDepart(DepartPoint, ArrivalPoint) != null)
+            if(routee.getRouteDepart(routeId) != null)
                 throw new AlreadyExistException("Route " + DepartPoint + " " + ArrivalPoint + " already exist!");
         } catch (NotFoundException e) {
             Route route = new Route(DepartPoint, ArrivalPoint);
@@ -119,7 +118,7 @@ public class MainControler {
 
 
     @ShellMethod("delete route")
-    public String deleteGenre(String DepartPoint, String ArrivalPoint){
+    public String deleteRoute(String DepartPoint, String ArrivalPoint){
         try {
             if (routee.getRouteDepart(DepartPoint, ArrivalPoint) != null) {
                 Long routeId = routee.getRouteDepart(DepartPoint, ArrivalPoint).getRouteId();
@@ -134,7 +133,7 @@ public class MainControler {
                     }
                     for(Flight flight: fligthe){
                         if(flight.getRoute().equals(routeId)) {
-                            flight.setRoute("None");
+                            flight.setRoute((long) 0);
                         }
                     }
                     flight.fileUnload(fligthe);
