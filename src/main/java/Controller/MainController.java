@@ -23,9 +23,9 @@ import java.util.Objects;
 public class MainController {
     @Autowired
     InterFlight flight;
+
     @Autowired
     InterRoute routes;
-
 
     @ShellMethod("add new flight")
     public String addFlight(String airbus, Long route, Date departTime, Date travelTime) {

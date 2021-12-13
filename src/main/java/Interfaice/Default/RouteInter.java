@@ -31,7 +31,7 @@ public class RouteInter implements InterRoute{
         List<Route> list = fileLoad();
 
         for(Route tmpRoute:list){
-            if(route.getRouteId() == tmpRoute.getRouteId()) {
+            if(route.getRouteId().equals(tmpRoute.getRouteId())) {
                 list.remove(tmpRoute);
                 break;
             }
@@ -44,7 +44,7 @@ public class RouteInter implements InterRoute{
 
     public List<Route> fileLoad(){
 
-        BufferedReader reader = null;
+        BufferedReader reader;
         List<Route> list = new ArrayList<>();
         Type itemsListType = new TypeToken<List<Route>>() {}.getType();
         try {
@@ -57,7 +57,7 @@ public class RouteInter implements InterRoute{
         return list;
     }
 
-   @Override
+    @Override
     public Route getRouteDepart(String departPoint, String arrivalPoint) throws NotFoundException {
         List<Route> list = fileLoad();
         for(Route route: list){
@@ -91,3 +91,4 @@ public class RouteInter implements InterRoute{
     }
 
 }
+

@@ -8,9 +8,6 @@ public class Route {
     private String departPoint;
     private String arrivalPoint;
 
-    public Route() {
-    }
-
     public Route(String departPoint, String arrivalPoint) {
         this.departPoint = departPoint;
         this.arrivalPoint = arrivalPoint;

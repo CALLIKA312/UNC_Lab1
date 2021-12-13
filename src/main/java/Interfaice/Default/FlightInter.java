@@ -31,7 +31,7 @@ public class FlightInter implements InterFlight {
         List<Flight> list = fileLoad();
 
         for(Flight tmpFlight:list){
-            if(flight.getFlightId() == tmpFlight.getFlightId()) {
+            if(flight.getFlightId().equals(tmpFlight.getFlightId())) {
                 list.remove(tmpFlight);
                 break;
             }
@@ -43,7 +43,7 @@ public class FlightInter implements InterFlight {
     @Override
     public List<Flight> fileLoad(){
 
-        BufferedReader reader = null;
+        BufferedReader reader;
         List<Flight> list = new ArrayList<>();
         Type itemsListType = new TypeToken<List<Flight>>() {}.getType();
         try {
