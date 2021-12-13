@@ -92,12 +92,12 @@ public class ViewController {
             Date travelTime = flight.getTravelTime();
             String routeDp = route.getRouteDepart(flight.getRoute()).getDepartPoint();
             String routeAp = route.getRouteDepart(flight.getRoute()).getArrivalPoint();
-            data.append("flightId: " + flightId + "\n");
-            data.append("airbus: " + airbus + "\n");
-            data.append("depart point: " + routeDp + "\n");
-            data.append("arrival point: " + routeAp + "\n");
-            data.append("departTime: " + departTime + "\n");
-            data.append("travelTime: " + travelTime + "\n");
+            data.append("flightId: ").append(flightId).append("\n");
+            data.append("airbus: ").append(airbus).append("\n");
+            data.append("depart point: ").append(routeDp).append("\n");
+            data.append("arrival point: ").append(routeAp).append("\n");
+            data.append("departTime: ").append(departTime).append("\n");
+            data.append("travelTime: ").append(travelTime).append("\n");
 
         } catch (NotFoundException e) {
             e.printStackTrace();

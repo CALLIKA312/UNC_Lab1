@@ -94,7 +94,7 @@ public class MainController {
 
     @ShellMethod("add route")
     public String addRoute(String DepartPoint, String ArrivalPoint){
-        Long routeId = 1L;
+        long routeId = 1L;
         List<Route> list = routes.fileLoad();
         Route routeEnd;
         if (!list.isEmpty()) {
@@ -122,7 +122,7 @@ public class MainController {
         try {
             if (routes.getRouteDepart(DepartPoint, ArrivalPoint) != null) {
                 Long routeId = routes.getRouteDepart(DepartPoint, ArrivalPoint).getRouteId();
-                List<Flight> fligthe = flight.fileLoad();
+                List<Flight> flighted = flight.fileLoad();
                 if (routes.delete(routes.getRouteDepart(DepartPoint, ArrivalPoint))) {
                     try {
                         routes.getRouteDepart(DepartPoint, ArrivalPoint);
@@ -131,12 +131,12 @@ public class MainController {
                         route.setRouteId(0L);
                         routes.save(route);
                     }
-                    for(Flight flight: fligthe){
+                    for(Flight flight: flighted){
                         if(flight.getRoute().equals(routeId)) {
                             flight.setRoute(0L);
                         }
                     }
-                    flight.fileUnload(fligthe);
+                    flight.fileUnload(flighted);
                     return "Route deleted";
                 }
                 else return "ERROR: Not remotely";
