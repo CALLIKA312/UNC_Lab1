@@ -1,5 +1,8 @@
 package Entity;
 
+import lombok.Data;
+
+@Data
 public class Route {
     private Long RouteId;
     private String departPoint;
@@ -12,25 +15,4 @@ public class Route {
         this.departPoint = departPoint;
         this.arrivalPoint = arrivalPoint;
     }
-
-    public Long getRouteId(){return this.RouteId;}
-
-    public void setRouteId(Long RouteId){this.RouteId=RouteId;}
-
-    public String getDepartPoint() {
-        return this.departPoint;
-    }
-
-    public void setDepartPoint(String departPoint) {
-        this.departPoint = departPoint;
-    }
-
-    public String getArrivalPoint() {
-        return this.arrivalPoint;
-    }
-
-    public void setArrivalPoint(String arrivalPoint) {
-        this.arrivalPoint = arrivalPoint;
-    }
-
 }
