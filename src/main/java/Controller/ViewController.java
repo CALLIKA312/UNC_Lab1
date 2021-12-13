@@ -4,8 +4,6 @@ import Entity.Flight;
 import Exception.NotFoundException;
 import Interfaice.InterFlight;
 import Interfaice.InterRoute;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -22,12 +20,10 @@ public class ViewController {
     @Autowired
     InterRoute route;
 
-    private static final Gson GSON = new GsonBuilder().create();
-
     @ShellMethod("View all")
     public String viewAll(){
         List<Flight> airFl = flight.fileLoad();
-        StringBuffer data = new StringBuffer("");
+        StringBuffer data = new StringBuffer();
         for(Flight flight:airFl){
             viewContent(flight, data);
             data.append("-----------------------------------------\n");
@@ -41,7 +37,7 @@ public class ViewController {
         try {
             Flight flighty = flight.findFlight(airbus, route);
 
-            StringBuffer data = new StringBuffer("");
+            StringBuffer data = new StringBuffer();
             viewContent(flighty, data);
             data.append("-------------------end-------------------\n");
             return data.toString();
@@ -57,19 +53,19 @@ public class ViewController {
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m1, m2, m3, m4;
 
-        StringBuffer data = new StringBuffer("");
-        String airbus, routee;
+        StringBuffer data = new StringBuffer();
+        String airbus, routes;
         Date departTime, travelTime;
         for(Flight airFl:flightList){
             try {
                 airbus = airFl.getAirbus();
                 departTime = airFl.getDepartTime();
                 travelTime = airFl.getTravelTime();
-                routee = route.getRouteDepart(airFl.getRoute()).getDepartPoint();
+                routes = route.getRouteDepart(airFl.getRoute()).getDepartPoint();
                 m1 = p.matcher(airbus);
                 m2 = p.matcher((CharSequence) departTime);
                 m3 = p.matcher((CharSequence) travelTime);
-                m4 = p.matcher(routee);
+                m4 = p.matcher(routes);
                 if (m1.find() || m2.find() || m3.find() || m4.find()) {
                     viewContent(airFl, data);
                     data.append("-----------------------------------------\n");
