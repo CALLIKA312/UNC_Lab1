@@ -13,12 +13,6 @@ public class Route {
         this.arrivalPoint = arrivalPoint;
     }
 
-    public Route(Long routeId, String departPoint, String arrivalPoint) {
-        this.RouteId = routeId;
-        this.departPoint = departPoint;
-        this.arrivalPoint = arrivalPoint;
-    }
-
     public Long getRouteId(){return this.RouteId;}
 
     public void setRouteId(Long RouteId){this.RouteId=RouteId;}
@@ -39,7 +33,4 @@ public class Route {
         this.arrivalPoint = arrivalPoint;
     }
 
-    public String toString() {
-        return "Route{departPoint='" + this.departPoint + '\'' + ", arrivalPoint='" + this.arrivalPoint + '\'' + '}';
-    }
 }

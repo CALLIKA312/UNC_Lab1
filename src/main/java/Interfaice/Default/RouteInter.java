@@ -22,7 +22,7 @@ public class RouteInter implements InterRoute{
     public Boolean save(Route route) {
         List<Route> list = fileLoad();
         list.add(route);
-        return FileUnload(list);
+        return fileUnload(list);
     }
 
 
@@ -31,13 +31,13 @@ public class RouteInter implements InterRoute{
         List<Route> list = fileLoad();
 
         for(Route tmpRoute:list){
-            if(route.getDepartPoint() == tmpRoute.getDepartPoint() & route.getArrivalPoint() == tmpRoute.getArrivalPoint()) {
+            if(route.getRouteId() == tmpRoute.getRouteId()) {
                 list.remove(tmpRoute);
                 break;
             }
         }
         if(!list.isEmpty())
-            FileUnload(list);
+            fileUnload(list);
         return true;
     }
 
@@ -61,7 +61,7 @@ public class RouteInter implements InterRoute{
     public Route getRouteDepart(String departPoint, String arrivalPoint) throws NotFoundException {
         List<Route> list = fileLoad();
         for(Route route: list){
-            if(route.getDepartPoint().equals(departPoint) & route.getDepartPoint().equals(arrivalPoint)) return route;
+            if(route.getDepartPoint().equals(departPoint) && route.getDepartPoint().equals(arrivalPoint)) return route;
         }
         throw new NotFoundException("Not found route: " + departPoint + " " + arrivalPoint);
     }
@@ -76,7 +76,7 @@ public class RouteInter implements InterRoute{
     }
 
 
-    public Boolean FileUnload(List<Route> list){
+    public Boolean fileUnload(List<Route> list){
 
         try {
             FileWriter fileWriter = new FileWriter("name file", false);

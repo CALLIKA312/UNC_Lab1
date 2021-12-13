@@ -20,16 +20,16 @@ import java.util.List;
 import java.util.Objects;
 
 @ShellComponent
-public class MainControler {
+public class MainController {
     @Autowired
     InterFlight flight;
     @Autowired
-    InterRoute routee;
+    InterRoute routes;
 
 
     @ShellMethod("add new flight")
     public String addFlight(String airbus, Long route, Date departTime, Date travelTime) {
-        long id = 1l;
+        long id = 1L;
         List<Flight> list = flight.fileLoad();
         Flight flightEnd;
         if (!list.isEmpty()) {
@@ -38,12 +38,12 @@ public class MainControler {
                 id = flightEnd.getFlightId() + 1;
         }
         try{
-            Flight flighter = new Flight(id, airbus, route, departTime, travelTime);
-            if (flight.findFlight(flighter)) throw new AlreadyExistException("Track already exists!");
-            if (flight.save(flighter))
+            Flight flightier = new Flight(id, airbus, route, departTime, travelTime);
+            if (flight.findByAll(flightier)) throw new AlreadyExistException("Track already exists!");
+            if (flight.save(flightier))
                 return "Flight added.";
         }
-        catch (AlreadyExistException | NotFoundException e){
+        catch (AlreadyExistException e){
             e.printStackTrace();
         }
         return "Not added!";
@@ -51,7 +51,7 @@ public class MainControler {
 
 
     @ShellMethod("update flight")
-    public String updateFlight(String airbus, String route) {
+    public String updateFlight(String airbus, Long route) {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MМ-yyyy");
@@ -81,7 +81,7 @@ public class MainControler {
 
 
     @ShellMethod("delete flight")
-    public String deleteFlight(String airbus, String route){
+    public String deleteFlight(String airbus, Long route){
         try {
             flight.delete(flight.findFlight(airbus, route));
             return "Flight deleted!";
@@ -94,8 +94,8 @@ public class MainControler {
 
     @ShellMethod("add route")
     public String addRoute(String DepartPoint, String ArrivalPoint){
-        Long routeId = (long) 1;
-        List<Route> list = routee.fileLoad();
+        Long routeId = 1L;
+        List<Route> list = routes.fileLoad();
         Route routeEnd;
         if (!list.isEmpty()) {
             routeEnd = list.get(list.size()-1);
@@ -103,12 +103,12 @@ public class MainControler {
                 routeId = routeEnd.getRouteId() + 1;
         }
         try {
-            if(routee.getRouteDepart(routeId) != null)
+            if(routes.getRouteDepart(routeId) != null)
                 throw new AlreadyExistException("Route " + DepartPoint + " " + ArrivalPoint + " already exist!");
         } catch (NotFoundException e) {
             Route route = new Route(DepartPoint, ArrivalPoint);
             route.setRouteId(routeId);
-            if (routee.save(route))
+            if (routes.save(route))
                 return "Successfully added!";
         } catch (AlreadyExistException e) {
             e.printStackTrace();
@@ -120,20 +120,20 @@ public class MainControler {
     @ShellMethod("delete route")
     public String deleteRoute(String DepartPoint, String ArrivalPoint){
         try {
-            if (routee.getRouteDepart(DepartPoint, ArrivalPoint) != null) {
-                Long routeId = routee.getRouteDepart(DepartPoint, ArrivalPoint).getRouteId();
+            if (routes.getRouteDepart(DepartPoint, ArrivalPoint) != null) {
+                Long routeId = routes.getRouteDepart(DepartPoint, ArrivalPoint).getRouteId();
                 List<Flight> fligthe = flight.fileLoad();
-                if (routee.delete(routee.getRouteDepart(DepartPoint, ArrivalPoint))) {
+                if (routes.delete(routes.getRouteDepart(DepartPoint, ArrivalPoint))) {
                     try {
-                        routee.getRouteDepart(DepartPoint, ArrivalPoint);
+                        routes.getRouteDepart(DepartPoint, ArrivalPoint);
                     }catch (NotFoundException e){
-                        Route route = new Route("None","None");
-                        route.setRouteId((long) 0);
-                        routee.save(route);
+                        Route route = new Route(null,null);
+                        route.setRouteId(0L);
+                        routes.save(route);
                     }
                     for(Flight flight: fligthe){
                         if(flight.getRoute().equals(routeId)) {
-                            flight.setRoute((long) 0);
+                            flight.setRoute(0L);
                         }
                     }
                     flight.fileUnload(fligthe);

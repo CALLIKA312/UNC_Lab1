@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Flight {
 
-    private Long flightId,route;
+    private Long flightId, route;
     private String airbus;
     private Date departTime, travelTime;
 
@@ -13,6 +13,13 @@ public class Flight {
 
     public Flight(Long flightId, String airbus, Long route, Date departTime, Date travelTime) {
         this.flightId = flightId;
+        this.airbus = airbus;
+        this.route = route;
+        this.departTime = departTime;
+        this.travelTime = travelTime;
+    }
+
+    public Flight(String airbus, Long route, Date departTime, Date travelTime) {
         this.airbus = airbus;
         this.route = route;
         this.departTime = departTime;
@@ -59,14 +66,4 @@ public class Flight {
         this.travelTime = travelTime;
     }
 
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "flightId=" + flightId +
-                ", airbus='" + airbus + '\'' +
-                ", route='" + route + '\'' +
-                ", departTime=" + departTime +
-                ", travelTime=" + travelTime +
-                '}';
-    }
 }

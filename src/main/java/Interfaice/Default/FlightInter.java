@@ -27,7 +27,7 @@ public class FlightInter implements InterFlight {
 
 
     @Override
-    public Boolean delete(Flight flight) {
+    public void delete(Flight flight) {
         List<Flight> list = fileLoad();
 
         for(Flight tmpFlight:list){
@@ -38,10 +38,9 @@ public class FlightInter implements InterFlight {
         }
         if(!list.isEmpty())
             fileUnload(list);
-        return true;
     }
 
-
+    @Override
     public List<Flight> fileLoad(){
 
         BufferedReader reader = null;
@@ -57,7 +56,7 @@ public class FlightInter implements InterFlight {
         return list;
     }
 
-
+    @Override
     public Boolean fileUnload(List<Flight> list){
 
         try {
@@ -72,7 +71,8 @@ public class FlightInter implements InterFlight {
         return true;
     }
 
-    public Flight findFlight(String airbus, String route) throws NotFoundException {
+    @Override
+    public Flight findFlight(String airbus, Long route) throws NotFoundException {
         List<Flight> list = fileLoad();
         for(Flight flight:list){
             if(flight.getAirbus().equals(airbus) && flight.getRoute().equals(route))
@@ -81,13 +81,14 @@ public class FlightInter implements InterFlight {
         throw new NotFoundException("Not found flight: " + airbus + " " + route);
     }
 
-    public Boolean findFlight(Flight flight) throws NotFoundException {
-        List<Flight> list = fileLoad();
-        for (Flight tmpFlight: list){
+    @Override
+    public boolean findByAll(Flight flight) {
+        List<Flight> fl = fileLoad();
+        for (Flight tmpFlight: fl){
             if(flight.getAirbus().equals(tmpFlight.getAirbus())){
                 if (tmpFlight.getAirbus().equals(flight.getAirbus()) &&
                         tmpFlight.getRoute().equals(flight.getRoute())) {
-                            return true;
+                    return true;
                 }
                 else break;
             }

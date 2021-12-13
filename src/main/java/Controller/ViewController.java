@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,12 +37,12 @@ public class ViewController {
     }
 
     @ShellMethod("View find airbus and route")
-    public String searchFlight(String airbus, String route){
+    public String searchFlight(String airbus, Long route){
         try {
-            Flight flighte = flight.findFlight(airbus, route);
+            Flight flighty = flight.findFlight(airbus, route);
 
             StringBuffer data = new StringBuffer("");
-            viewContent(flighte, data);
+            viewContent(flighty, data);
             data.append("-------------------end-------------------\n");
             return data.toString();
         } catch (NotFoundException e){
@@ -55,7 +54,7 @@ public class ViewController {
     @ShellMethod("View search")
     public String search(String regex){
         List<Flight> flightList = flight.fileLoad();
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE); //без учета регистра
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m1, m2, m3, m4;
 
         StringBuffer data = new StringBuffer("");
@@ -77,6 +76,7 @@ public class ViewController {
                 }else continue;
             } catch (NotFoundException e) {
                 e.printStackTrace();
+                continue;
             }
         }
 
