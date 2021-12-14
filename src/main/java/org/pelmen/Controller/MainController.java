@@ -1,11 +1,11 @@
-package Controller;
+package org.pelmen.Controller;
 
-import Entity.Flight;
-import Entity.Route;
-import Exception.AlreadyExistException;
-import Exception.NotFoundException;
-import Interfaice.InterFlight;
-import Interfaice.InterRoute;
+import org.pelmen.Entity.Flight;
+import org.pelmen.Entity.Route;
+import org.pelmen.Exception.AlreadyExistException;
+import org.pelmen.Exception.NotFoundException;
+import org.pelmen.Interfaice.InterFlight;
+import org.pelmen.Interfaice.InterRoute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

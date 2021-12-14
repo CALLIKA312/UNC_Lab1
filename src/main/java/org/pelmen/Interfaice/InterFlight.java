@@ -1,7 +1,7 @@
-package Interfaice;
+package org.pelmen.Interfaice;
 
-import Entity.Flight;
-import Exception.NotFoundException;
+import org.pelmen.Entity.Flight;
+import org.pelmen.Exception.NotFoundException;
 import java.util.List;
 
 public interface InterFlight {

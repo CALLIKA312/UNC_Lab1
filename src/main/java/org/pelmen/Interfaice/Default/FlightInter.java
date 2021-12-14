@@ -1,8 +1,8 @@
-package Interfaice.Default;
+package org.pelmen.Interfaice.Default;
 
-import Entity.Flight;
-import Interfaice.InterFlight;
-import Exception.NotFoundException;
+import org.pelmen.Entity.Flight;
+import org.pelmen.Interfaice.InterFlight;
+import org.pelmen.Exception.NotFoundException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

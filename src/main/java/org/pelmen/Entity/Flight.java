@@ -1,4 +1,4 @@
-package Entity;
+package org.pelmen.Entity;
 
 import lombok.Data;
 

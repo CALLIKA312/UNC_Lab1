@@ -1,4 +1,4 @@
-package Exception;
+package org.pelmen.Exception;
 
 public class AlreadyExistException extends Exception{
     public AlreadyExistException(String message) {

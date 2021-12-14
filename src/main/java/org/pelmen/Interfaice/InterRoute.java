@@ -1,8 +1,8 @@
-package Interfaice;
+package org.pelmen.Interfaice;
 
-import Entity.Route;
+import org.pelmen.Entity.Route;
 
-import Exception.NotFoundException;
+import org.pelmen.Exception.NotFoundException;
 import java.util.List;
 
 public interface InterRoute {
