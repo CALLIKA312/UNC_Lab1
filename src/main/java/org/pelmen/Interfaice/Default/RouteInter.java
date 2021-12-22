@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.pelmen.ConstFile.FILE_ROUTE_DBASE;
+
 @Service
 public class RouteInter implements InterRoute{
 
@@ -48,7 +50,7 @@ public class RouteInter implements InterRoute{
         List<Route> list = new ArrayList<>();
         Type itemsListType = new TypeToken<List<Route>>() {}.getType();
         try {
-            reader = new BufferedReader(new FileReader("name file"));
+            reader = new BufferedReader(new FileReader(FILE_ROUTE_DBASE));
             list = GSON.fromJson(reader, itemsListType);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -79,7 +81,7 @@ public class RouteInter implements InterRoute{
     public Boolean fileUnload(List<Route> list){
 
         try {
-            FileWriter fileWriter = new FileWriter("name file", false);
+            FileWriter fileWriter = new FileWriter(FILE_ROUTE_DBASE, false);
             fileWriter.write(GSON.toJson(list));
             fileWriter.flush();
             fileWriter.close();

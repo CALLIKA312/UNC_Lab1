@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.pelmen.ConstFile.FILE_FLIGHT_DBASE;
+
 @Service
 public class FlightInter implements InterFlight {
 
@@ -47,7 +49,7 @@ public class FlightInter implements InterFlight {
         List<Flight> list = new ArrayList<>();
         Type itemsListType = new TypeToken<List<Flight>>() {}.getType();
         try {
-            reader = new BufferedReader(new FileReader("name file"));
+            reader = new BufferedReader(new FileReader(FILE_FLIGHT_DBASE));
             list = GSON.fromJson(reader, itemsListType);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -60,7 +62,7 @@ public class FlightInter implements InterFlight {
     public Boolean fileUnload(List<Flight> list){
 
         try {
-            FileWriter fileWriter = new FileWriter("name file", false);
+            FileWriter fileWriter = new FileWriter(FILE_FLIGHT_DBASE, false);
             fileWriter.write(GSON.toJson(list));
             fileWriter.flush();
             fileWriter.close();
