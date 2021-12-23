@@ -60,7 +60,6 @@ public class FlightInter implements InterFlight {
 
     @Override
     public Boolean fileUnload(List<Flight> list){
-
         try {
             FileWriter fileWriter = new FileWriter(FILE_FLIGHT_DBASE, false);
             fileWriter.write(GSON.toJson(list));
