@@ -24,8 +24,8 @@ public class ViewController {
     public String viewAll(){
         List<Flight> airFl = flight.fileLoad();
         StringBuffer data = new StringBuffer();
-        for(Flight flight:airFl){
-            viewContent(flight, data);
+        for(Flight flights:airFl){
+            viewContent(flights, data);
             data.append("-----------------------------------------\n");
         }
 
@@ -48,9 +48,9 @@ public class ViewController {
     }
 
     @ShellMethod("View search")
-    public String search(String regex){
+    public String search(String airbuses){
         List<Flight> flightList = flight.fileLoad();
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile(airbuses, Pattern.CASE_INSENSITIVE);
         Matcher m1, m2, m3, m4;
 
         StringBuffer data = new StringBuffer();
@@ -96,6 +96,8 @@ public class ViewController {
             data.append("travelTime: ").append(travelTime).append("\n");
 
         } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

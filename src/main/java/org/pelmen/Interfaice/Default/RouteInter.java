@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,9 @@ import static org.pelmen.ConstFile.FILE_ROUTE_DBASE;
 @Service
 public class RouteInter implements InterRoute{
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+            .create();
 
     @Override
     public Boolean save(Route route) {
@@ -72,6 +73,7 @@ public class RouteInter implements InterRoute{
 
     @Override
     public Route getRouteDepart(Long id) throws NotFoundException {
+
         List<Route> list = fileLoad();
         for(Route route: list){
             if(route.getRouteId().equals(id)) return route;

@@ -28,7 +28,7 @@ public class MainController {
     InterRoute routes;
 
     @ShellMethod("add new flight")
-    public String addFlight(String airbus, Long route, Date departTime, Date travelTime) {
+    public String addFlight(String airbus, Long route, String departTime, String travelTime) {
         long id = 1L;
         List<Flight> list = flight.fileLoad();
         Flight flightEnd;
@@ -38,12 +38,14 @@ public class MainController {
                 id = flightEnd.getFlightId() + 1;
         }
         try{
-            Flight flightier = new Flight(id, airbus, route, departTime, travelTime);
+            Date departTimes = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").parse(departTime);
+            Date travelTimes = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").parse(travelTime);
+            Flight flightier = new Flight(id, airbus, route, departTimes, travelTimes);
             if (flight.findByAll(flightier)) throw new AlreadyExistException("Track already exists!");
             if (flight.save(flightier))
                 return "Flight added.";
         }
-        catch (AlreadyExistException e){
+        catch (AlreadyExistException | ParseException e){
             e.printStackTrace();
         }
         return "Not added!";

@@ -18,7 +18,9 @@ import static org.pelmen.ConstFile.FILE_FLIGHT_DBASE;
 @Service
 public class FlightInter implements InterFlight {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+            .create();
 
     @Override
     public Boolean save(Flight flight) {
@@ -38,8 +40,7 @@ public class FlightInter implements InterFlight {
                 break;
             }
         }
-        if(!list.isEmpty())
-            fileUnload(list);
+        fileUnload(list);
     }
 
     @Override

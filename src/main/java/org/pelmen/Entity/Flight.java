@@ -20,6 +20,7 @@ public class Flight {
         this.route = route;
         this.departTime = departTime;
         this.travelTime = travelTime;
+
     }
 
     public Flight(String airbus, Long route, Date departTime, Date travelTime) {
