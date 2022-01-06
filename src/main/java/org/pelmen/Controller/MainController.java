@@ -2,7 +2,6 @@ package org.pelmen.Controller;
 
 import org.pelmen.Entity.Flight;
 import org.pelmen.Entity.Route;
-import org.pelmen.Exception.AlreadyExistException;
 import org.pelmen.Exception.NotFoundException;
 import org.pelmen.Interfaice.InterFlight;
 import org.pelmen.Interfaice.InterRoute;
@@ -41,11 +40,9 @@ public class MainController {
             Date departTimes = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").parse(departTime);
             Date travelTimes = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").parse(travelTime);
             Flight flightier = new Flight(id, airbus, route, departTimes, travelTimes);
-            if (flight.findByAll(flightier)) throw new AlreadyExistException("Track already exists!");
-            if (flight.save(flightier))
-                return "Flight added.";
+            if (flight.save(flightier)) return "Flight added.";
         }
-        catch (AlreadyExistException | ParseException e){
+        catch (ParseException e){
             e.printStackTrace();
         }
         return "Not added!";
@@ -56,7 +53,7 @@ public class MainController {
     public String updateFlight(String airbus, Long route) {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MМ-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
         try {
 
             Flight fUpdate = new Flight(flight.findFlight(airbus, route).getFlightId(),
@@ -105,14 +102,10 @@ public class MainController {
                 routeId = routeEnd.getRouteId() + 1;
         }
         try {
-            if(routes.getRouteDepart(routeId) != null)
-                throw new AlreadyExistException("Route " + DepartPoint + " " + ArrivalPoint + " already exist!");
-        } catch (NotFoundException e) {
             Route route = new Route(DepartPoint, ArrivalPoint);
             route.setRouteId(routeId);
-            if (routes.save(route))
-                return "Successfully added!";
-        } catch (AlreadyExistException e) {
+            if (routes.save(route)) return "Successfully added!";
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "Not added";
@@ -120,19 +113,13 @@ public class MainController {
 
 
     @ShellMethod("delete route")
-    public String deleteRoute(String DepartPoint, String ArrivalPoint){
+    public String deleteRoute(Long idRoute){
         try {
-            if (routes.getRouteDepart(DepartPoint, ArrivalPoint) != null) {
-                Long routeId = routes.getRouteDepart(DepartPoint, ArrivalPoint).getRouteId();
+            if (routes.getRouteDepart(idRoute) != null) {
+                Long routeId = routes.getRouteDepart(idRoute).getRouteId();
                 List<Flight> flighted = flight.fileLoad();
-                if (routes.delete(routes.getRouteDepart(DepartPoint, ArrivalPoint))) {
-                    try {
-                        routes.getRouteDepart(DepartPoint, ArrivalPoint);
-                    }catch (NotFoundException e){
-                        Route route = new Route(null,null);
-                        route.setRouteId(0L);
-                        routes.save(route);
-                    }
+                if (routes.delete(routes.getRouteDepart(idRoute))) {
+
                     for(Flight flight: flighted){
                         if(flight.getRoute().equals(routeId)) {
                             flight.setRoute(0L);

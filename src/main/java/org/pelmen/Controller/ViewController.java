@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -55,15 +56,15 @@ public class ViewController {
 
         StringBuffer data = new StringBuffer();
         String airbus, routes;
-        Date departTime, travelTime;
+        String departTime, travelTime;
         for(Flight airFl:flightList){
             try {
                 airbus = airFl.getAirbus();
-                departTime = airFl.getDepartTime();
-                travelTime = airFl.getTravelTime();
+                departTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").format(airFl.getDepartTime());
+                travelTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz").format(airFl.getTravelTime());
                 routes = route.getRouteDepart(airFl.getRoute()).getDepartPoint();
                 m1 = p.matcher(airbus);
-                m2 = p.matcher((CharSequence) departTime);
+                m2 = p.matcher(departTime);
                 m3 = p.matcher((CharSequence) travelTime);
                 m4 = p.matcher(routes);
                 if (m1.find() || m2.find() || m3.find() || m4.find()) {
