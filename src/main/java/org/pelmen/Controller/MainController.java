@@ -123,6 +123,8 @@ public class MainController {
                     for(Flight flight: flighted){
                         if(flight.getRoute().equals(routeId)) {
                             flight.setRoute(0L);
+                            flight.setDepartTime(null);
+                            flight.setTravelTime(null);
                         }
                     }
                     flight.fileUnload(flighted);

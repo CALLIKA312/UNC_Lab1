@@ -1,5 +1,10 @@
 [
   {
+    "routeId": 0,
+    "departPoint": "None",
+    "arrivalPoint": "None"
+  },
+  {
     "routeId": 1,
     "departPoint": "Los Angeles",
     "arrivalPoint": "Samara"
@@ -17,6 +22,11 @@
   {
     "routeId": 4,
     "departPoint": "Mexico",
+    "arrivalPoint": "Murmansk"
+  },
+  {
+    "routeId": 5,
+    "departPoint": "Moskva",
     "arrivalPoint": "Murmansk"
   }
 ]

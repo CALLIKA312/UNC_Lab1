@@ -47,5 +47,12 @@
     "airbus": "Airbus-88",
     "departTime": "2013-04-30T06:15:12SAMT",
     "travelTime": "2013-04-30T06:15:12SAMT"
+  },
+  {
+    "flightId": 8,
+    "route": 5,
+    "airbus": "Airbus-88",
+    "departTime": "2013-04-30T06:15:12SAMT",
+    "travelTime": "2013-04-30T06:15:12SAMT"
   }
 ]
